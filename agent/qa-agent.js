@@ -5,8 +5,8 @@ const { analyzeResult } = require("./analyzer");
 const { createReport } = require("./reporter");
 const { createHtmlReport } = require("./htmlReporter");
 
-console.log("🤖 AI QA Test Agent v1.0
-========================");
+console.log("🤖 AI QA Test Agent v1.0");
+console.log("========================");
 console.log("-----------------------------");
 
 try {

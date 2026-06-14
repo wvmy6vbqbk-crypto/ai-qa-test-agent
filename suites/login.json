@@ -1,0 +1,16 @@
+{
+  "feature": "Login",
+  "url": "https://the-internet.herokuapp.com/login",
+  "testCases": [
+    {
+      "name": "Valid Login",
+      "steps": [
+        { "action": "fill", "selector": "#username", "value": "tomsmith" },
+        { "action": "fill", "selector": "#password", "value": "SuperSecretPassword!" },
+        { "action": "smartClick", "selector": "#login-button" },
+        { "action": "expectUrl", "value": "secure" },
+        { "action": "expectText", "selector": "#flash", "value": "You logged into a secure area!" }
+      ]
+    }
+  ]
+}
