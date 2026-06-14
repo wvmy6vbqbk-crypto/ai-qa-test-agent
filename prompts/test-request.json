@@ -3,29 +3,41 @@
   "url": "https://the-internet.herokuapp.com/login",
   "testCases": [
     {
-      "name": "valid login",
-      "username": "tomsmith",
-      "password": "SuperSecretPassword!",
-      "expectedMessage": "You logged into a secure area!",
-      "expectedUrl": "secure"
+      "name": "Valid Login",
+      "steps": [
+        { "action": "fill", "selector": "#username", "value": "tomsmith" },
+        { "action": "fill", "selector": "#password", "value": "SuperSecretPassword!" },
+        { "action": "click", "selector": "button[type='submit']" },
+        { "action": "expectUrl", "value": "secure" },
+        { "action": "expectText", "selector": "#flash", "value": "You logged into a secure area!" }
+      ]
     },
     {
-      "name": "invalid password",
-      "username": "tomsmith",
-      "password": "wrongPassword",
-      "expectedMessage": "Your password is invalid!"
+      "name": "Invalid Password",
+      "steps": [
+        { "action": "fill", "selector": "#username", "value": "tomsmith" },
+        { "action": "fill", "selector": "#password", "value": "wrongPassword" },
+        { "action": "click", "selector": "button[type='submit']" },
+        { "action": "expectText", "selector": "#flash", "value": "Your password is invalid!" }
+      ]
     },
     {
-      "name": "invalid username",
-      "username": "wrongUser",
-      "password": "SuperSecretPassword!",
-      "expectedMessage": "Your username is invalid!"
+      "name": "Invalid Username",
+      "steps": [
+        { "action": "fill", "selector": "#username", "value": "wrongUser" },
+        { "action": "fill", "selector": "#password", "value": "SuperSecretPassword!" },
+        { "action": "click", "selector": "button[type='submit']" },
+        { "action": "expectText", "selector": "#flash", "value": "Your username is invalid!" }
+      ]
     },
     {
-      "name": "empty fields",
-      "username": "",
-      "password": "",
-      "expectedMessage": "Your username is invalid!"
+      "name": "Empty Fields",
+      "steps": [
+        { "action": "fill", "selector": "#username", "value": "" },
+        { "action": "fill", "selector": "#password", "value": "" },
+        { "action": "click", "selector": "button[type='submit']" },
+        { "action": "expectText", "selector": "#flash", "value": "Your username is invalid!" }
+      ]
     }
   ]
 }

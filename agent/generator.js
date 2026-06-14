@@ -1,39 +1,55 @@
 const fs = require("fs");
 const path = require("path");
 
-function generatePlaywrightTest(request) {
-  const outputPath = path.join(__dirname, "../tests/generated-login.spec.js");
+function generateStep(step) {
+  switch (step.action) {
+    case "fill":
+      return `await page.locator('${step.selector}').fill('${step.value}');`;
 
-  const generatedTests = request.testCases
+    case "click":
+      return `await page.locator('${step.selector}').click();`;
+
+    case "expectText":
+      return `await expect(page.locator('${step.selector}')).toContainText('${step.value}');`;
+
+    case "expectUrl":
+      return `await expect(page).toHaveURL(/${step.value}/);`;
+
+    default:
+      throw new Error(`Unknown action: ${step.action}`);
+  }
+}
+
+function generatePlaywrightTest(request) {
+  const outputPath = path.join(
+    __dirname,
+    "../tests/generated-test.spec.js"
+  );
+
+  const tests = request.testCases
     .map((testCase) => {
-      const urlCheck = testCase.expectedUrl
-        ? `\n  await expect(page).toHaveURL(/${testCase.expectedUrl}/);`
-        : "";
+      const steps = testCase.steps.map(generateStep).join("\n  ");
 
       return `
 test('${testCase.name}', async ({ page }) => {
   await page.goto('${request.url}');
-
-  await page.locator('#username').fill('${testCase.username}');
-  await page.locator('#password').fill('${testCase.password}');
-
-  await page.locator('button[type="submit"]').click();
-  ${urlCheck}
-  await expect(page.locator('#flash')).toContainText('${testCase.expectedMessage}');
+  ${steps}
 });
 `;
     })
     .join("\n");
 
-  const testCode = `
+  const code = `
 const { test, expect } = require('@playwright/test');
 
-${generatedTests}
+${tests}
 `;
 
-  fs.writeFileSync(outputPath, testCode.trim());
+  fs.writeFileSync(outputPath, code.trim());
 
   return outputPath;
 }
 
-module.exports = { generatePlaywrightTest };
+module.exports = {
+  generatePlaywrightTest,
+};
