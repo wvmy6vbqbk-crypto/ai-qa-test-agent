@@ -17,6 +17,24 @@ function generateStep(step) {
     
     case "smartClick":
       return `await clickWithHealing(page, '${step.selector}');`;
+    
+    case "hover":
+      return `await page.locator('${step.selector}').hover();`;
+
+    case "press":
+      return `await page.locator('${step.selector}').press('${step.value}');`;
+
+    case "check":
+      return `await page.locator('${step.selector}').check();`;
+
+    case "uncheck":
+      return `await page.locator('${step.selector}').uncheck();`;
+
+    case "selectOption":
+      return `await page.locator('${step.selector}').selectOption('${step.value}');`;
+
+    case "waitFor":
+      return `await page.locator('${step.selector}').waitFor();`;
 
     default:
       throw new Error(`Unknown action: ${step.action}`);
