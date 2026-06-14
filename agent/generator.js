@@ -30,8 +30,16 @@ function generatePlaywrightTest(request) {
   );
 
   const tests = request.testCases
-    .map((testCase) => {
-      const steps = testCase.steps.map(generateStep).join("\n  ");
+  .map((testCase) => {
+    if (!testCase.name) {
+      throw new Error("Each test case needs a name");
+    }
+
+    if (!testCase.steps || !Array.isArray(testCase.steps)) {
+      throw new Error(`Test case "${testCase.name}" needs a valid steps array`);
+    }
+
+   const steps = testCase.steps.map(generateStep).join("\n  ");
 
       return `
 test('${testCase.name}', async ({ page }) => {
