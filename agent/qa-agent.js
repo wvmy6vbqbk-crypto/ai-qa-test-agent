@@ -2,6 +2,7 @@ const { loadTestRequest } = require("./planner");
 const { generatePlaywrightTest } = require("./generator");
 const { runPlaywrightTests } = require("./runner");
 const { analyzeResult } = require("./analyzer");
+const { createReport } = require("./reporter");
 
 console.log("🤖 AI QA Orchestrator started");
 console.log("-----------------------------");
@@ -22,6 +23,7 @@ try {
   const result = runPlaywrightTests("tests/generated-login.spec.js");
 
   analyzeResult(result, request.testCases.length);
+  createReport(request, result);
 
   if (!result.success) {
     process.exit(1);
