@@ -7,7 +7,7 @@
       "steps": [
         { "action": "fill", "selector": "#username", "value": "tomsmith" },
         { "action": "fill", "selector": "#password", "value": "SuperSecretPassword!" },
-        { "action": "click", "selector": "button[type='submit']" },
+        { "action": "smartClick", "selector": "#login-button"},
         { "action": "expectUrl", "value": "secure" },
         { "action": "expectText", "selector": "#flash", "value": "You logged into a secure area!" }
       ]
@@ -17,7 +17,7 @@
       "steps": [
         { "action": "fill", "selector": "#username", "value": "tomsmith" },
         { "action": "fill", "selector": "#password", "value": "wrongPassword" },
-        { "action": "click", "selector": "button[type='submit']" },
+        { "action": "smartClick", "selector": "#login-button"},
         { "action": "expectText", "selector": "#flash", "value": "Your password is invalid!" }
       ]
     },
@@ -26,7 +26,7 @@
       "steps": [
         { "action": "fill", "selector": "#username", "value": "wrongUser" },
         { "action": "fill", "selector": "#password", "value": "SuperSecretPassword!" },
-        { "action": "click", "selector": "button[type='submit']" },
+        { "action": "smartClick", "selector": "#login-button"},
         { "action": "expectText", "selector": "#flash", "value": "Your username is invalid!" }
       ]
     },
@@ -35,7 +35,7 @@
       "steps": [
         { "action": "fill", "selector": "#username", "value": "" },
         { "action": "fill", "selector": "#password", "value": "" },
-        { "action": "click", "selector": "button[type='submit']" },
+        { "action": "smartClick", "selector": "#login-button"},
         { "action": "expectText", "selector": "#flash", "value": "Your username is invalid!" }
       ]
     }

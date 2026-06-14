@@ -14,6 +14,9 @@ function generateStep(step) {
 
     case "expectUrl":
       return `await expect(page).toHaveURL(/${step.value}/);`;
+    
+    case "smartClick":
+      return `await clickWithHealing(page, '${step.selector}');`;
 
     default:
       throw new Error(`Unknown action: ${step.action}`);
@@ -41,6 +44,7 @@ test('${testCase.name}', async ({ page }) => {
 
   const code = `
 const { test, expect } = require('@playwright/test');
+const { clickWithHealing } = require('../agent/selfHealing');
 
 ${tests}
 `;
