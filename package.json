@@ -4,13 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-
-    "qa": "node agent/qa-agent.js",
-
-    "test": "playwright test",
-
-    "report": "playwright show-report"
-
+  "qa": "node agent/qa-agent.js",
+  "qa:all": "node agent/run-all-suites.js",
+  "test": "playwright test",
+  "report": "playwright show-report"
   },
   "keywords": [],
   "author": "",
