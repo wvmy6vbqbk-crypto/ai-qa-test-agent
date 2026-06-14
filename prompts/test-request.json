@@ -1,0 +1,7 @@
+{
+  "feature": "Login",
+  "url": "https://the-internet.herokuapp.com/login",
+  "username": "tomsmith",
+  "password": "SuperSecretPassword!",
+  "goal": "Verify that a user can log in successfully and is redirected to the secure area."
+}

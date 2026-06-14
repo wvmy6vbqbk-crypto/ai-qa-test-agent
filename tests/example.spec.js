@@ -1,19 +1,15 @@
-// @ts-check
-import { test, expect } from '@playwright/test';
+const { test, expect } = require('@playwright/test');
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+test('AI Agent Login Test', async ({ page }) => {
+  await page.goto('https://the-internet.herokuapp.com/login');
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+  await page.locator('#username').fill('tomsmith');
+  await page.locator('#password').fill('SuperSecretPassword!');
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await page.locator('button[type="submit"]').click();
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+  await expect(page).toHaveURL(/secure/);
+  await expect(page.locator('#flash')).toContainText(
+    'You logged into a secure area!'
+  );
 });
