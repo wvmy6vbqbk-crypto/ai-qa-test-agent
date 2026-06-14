@@ -1,0 +1,16 @@
+{
+  "feature": "Contact Form",
+  "url": "https://example.com/contact",
+  "testCases": [
+    {
+      "name": "Submit contact form",
+      "steps": [
+        { "action": "fill", "selector": "#name", "value": "Julia Becea" },
+        { "action": "fill", "selector": "#email", "value": "julia@example.com" },
+        { "action": "fill", "selector": "#message", "value": "This is a test message." },
+        { "action": "click", "selector": "#submit" },
+        { "action": "expectText", "selector": ".success", "value": "Thank you" }
+      ]
+    }
+  ]
+}

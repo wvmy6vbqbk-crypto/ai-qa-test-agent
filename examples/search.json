@@ -1,0 +1,14 @@
+{
+  "feature": "Search",
+  "url": "https://example.com",
+  "testCases": [
+    {
+      "name": "Search for keyword",
+      "steps": [
+        { "action": "fill", "selector": "#search", "value": "test automation" },
+        { "action": "click", "selector": "#search-button" },
+        { "action": "expectText", "selector": ".results", "value": "test automation" }
+      ]
+    }
+  ]
+}
